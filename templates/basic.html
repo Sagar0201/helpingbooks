@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/helping_books.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+{%block css%}
+
+{%endblock%}
+
+<body>
+    <section class="bodydesigns">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="popupmessage" id="panel">
+            <div class="popup-con">
+                <h1 class="message-info">{{ message.tags }}</h1>
+                <p class="message-msg">{{message}}</p>
+                <button onclick="popup()" class="button1">Close</button>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+
+
+        <div class="homedesign">
+            <div class="boxcolor"></div>
+            <div class="boxcolor"></div>
+            <div class="boxcolor"></div>
+            <div class="boxcolor"></div>
+            <div class="boxcolor"></div>
+            <div class="drops">
+                <div class="drop"></div>
+                <div class="drop"></div>
+                <div class="drop"></div>
+                <div class="drop"></div>
+                <div class="drop"></div>
+                <div class="drop"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ###########################################################################3 -->
+
+
+    <header>
+        <nav id="navbar" class="navbar">
+            <div class="navbar-container container">
+                <input type="checkbox">
+                <div class="hamburger-lines">
+                    <span class="line line1"></span>
+                    <span class="line line2"></span>
+                    <span class="line line3"></span>
+                </div>
+                <ul class="menu-items">
+                    <li class="color"><a href="{% url 'home' %}" id="homenav">Home</a></li>
+                    <li onclick="myFunction()" class="navcat"><a id="navcat">Categories <i
+                                class="fa fa-caret-down"></i></a>
+                        <ul id="myDIV">
+
+                            {% for p in BookCat %}
+                            <li><a href="#{{p}}">{{p}}</a></li>
+                            {%endfor%}
+                        </ul>
+
+                    </li>
+                    <li class="color"><a href="{% url 'home' %}#bookposts" id="navposts">Books</a></li>
+                    <li class="color"><a href="{% url 'home' %}#about-us" id="navabout">About Us</a></li>
+                    <li class="color"><a href="{% url 'contact' %}" id="navcontact">Contact Us</a></li>
+                    <div class="search-box" id="navsearch">
+                        <form action="/search" method="get">
+                            <input class="search-txt" type="text" name="Query" placeholder="Type To Search...">
+                            <button type=submit id="search" class="search-btn">
+                                <i class="fas fa-search fa-2x"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <li onclick="userInfo()"><a href="{% url 'profile' %}" id="navuser">
+                            <div class="nav-profile-photo"><img src="{{request.user.profile.image.url}}" alt=""></div>
+                        </a></li>
+
+
+                </ul>
+                {% comment %} <img src="{% static 'images/hh4.jpg'%}" alt="" class="logo"> {% endcomment %}
+                <h1 class="logo">Helping Books</h1>
+
+            </div>
+            <div class="navbarForMobo">
+                <ul class="menu-items1">
+                    <li class="color"><a href="{% url 'home' %}#homeUI" id="homenav"><i class="fas fa-home"></i></a>
+                    </li>
+                    <li onclick="BookCatBtn()"><a id="navcat"><i class="fas fa-book"></i></a>
+                        <ul id="myDIVBtn">
+
+                            {% for p in BookCat %}
+                            <li><a href="#{{p}}">{{p}}</a></li>
+                            {%endfor%}
+                        </ul>
+
+                    </li>
+                    <!-- <div class="search-box" id="navsearch">
+                        <input class="search-txt" type="text" name="Search" placeholder="Type To Search...">
+                        <a class="search-btn" href="#"><i class="fas fa-search fa-2x"></i></a>
+
+                    </div> -->
+                    <div class="search-box" id="navsearch">
+                        <form action="/search" method="get">
+                            <input class="search-txt" type="text" name="Query" placeholder="Type To Search...">
+                            <button type=submit id="search" class="search-btn">
+                                <i class="fas fa-search fa-2x"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <li onclick="userInfo()"><a href="{% url 'profile' %}" id="navuser">
+                            <div class="nav-profile-photo"><img src="{{request.user.profile.image.url}}" alt=""></div>
+                        </a></li>
+
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+    {% block body %} {% endblock %}
+
+
+    <footer class="footer" id="footers">
+        <div class="social-media-links">
+            <i class="fab fa-facebook fa-4x"></i>
+            <i class="fab fa-twitter fa-4x"></i>
+            <a href="https://www.instagram.com/_sagar_0201_/"><i class="fab fa-instagram fa-4x"></i></a>
+        </div>
+        <p>Helping Books &copy; 2021, All Rights Reserved</p>
+    </footer>
+
+    <script src="{% static 'js/helping_books.js' %}">
+    </script>
+    {%block js%}
+
+    {%endblock%}
+</body>
+
+</html>

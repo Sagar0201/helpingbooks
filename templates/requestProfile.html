@@ -1,0 +1,247 @@
+{% extends 'basic.html' %}
+{% load static %}
+{%block title%}Log In Page{%endblock%}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
+
+    .navcat {
+        display: none;
+    }
+
+    .login-page {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
+        overflow-y: hidden;
+    }
+
+    .Login {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 90%;
+        height: 82%;
+        margin: auto;
+        z-index: 3;
+        background-clip: padding-box;
+        border-radius: 30px;
+        background-color: #ffffff10;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 25px 45px rgb(0, 0, 0, 0.1);
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-right: 1px solid rgb(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    }
+
+    .Logincontent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .Logincontent h1 {
+        font-size: 8em;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background: linear-gradient(to right, red, black);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        text-align: center;
+    }
+
+    .Logincontent p {
+        font-size: 2rem;
+        padding: 1rem 0;
+        font-weight: 300;
+        width: 100%;
+        text-align: center;
+    }
+
+    .Login .bookimage {
+        width: 35rem;
+        height: 40rem;
+        position: relative;
+    }
+
+    .bookimage img {
+        display: block;
+        width: 100%;
+        height: 100%;
+
+    }
+
+    .form1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff10;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        width: 30rem;
+        height: 50rem;
+        padding: 3rem;
+        background-clip: padding-box;
+        border-radius: 10px;
+        box-shadow: 0 25px 45px rgb(0, 0, 0, 0.1);
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-right: 1px solid rgb(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+
+    }
+
+    .form1 .profile_pic {
+        margin-bottom: 2rem;
+    }
+
+    .form1 .profile_pic img {
+        display: block;
+        height: 15rem;
+        width: 15rem;
+        border-radius: 50%;
+        margin: auto;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .form1 h1,
+    h2 {
+        text-transform: capitalize;
+        color: #444;
+        font-weight: 700;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .form1 h2 {
+        font-size: 1.5rem;
+    }
+
+    .form1 .followings_system {
+        display: flex;
+        margin: 1rem;
+    }
+
+    .form1 .followings_system h1 {
+        color: black;
+    }
+
+    .form1 .followings_system h2 {
+        font-size: 1em;
+        margin: 0.5em;
+    }
+
+    @media (max-width:500px) {
+        .login-page {
+            overflow: hidden;
+        }
+
+        .Login {
+            height: 88%;
+            flex-direction: column;
+            margin-top: 1.7rem;
+            overflow: hidden;
+            background-color: #ffffff10;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            justify-content: center;
+
+        }
+
+        .Logincontent {
+            display: none;
+        }
+
+        .form1 {
+            border: none;
+            background: none;
+            box-shadow: none;
+            width: 100%;
+            max-width: 32rem;
+            backdrop-filter: none;
+        }
+
+        .form1 .profile_pic img {
+            height: 15rem;
+            width: 15rem;
+        }
+
+    }
+</style>
+
+
+{% endblock %}
+
+{%block body%}
+<section class="login-page" id="loginpage ">
+
+    <div class="Login" id="LoginUI">
+        <div class="Logincontent">
+            <div class="bookimage">
+                <img src="{% static 'images/h121.png' %}" alt="">
+            </div>
+            <h1 class="main-title">Helping Books</h1>
+            <p>Help The People Who Does Not Afford The Books</p>
+
+        </div>
+
+        {% for p in Profile%}
+        <div class="form1">
+            <div class="profile_pic">
+                <img src="{{p.profile.image.url}}" alt="">
+            </div>
+            <div class="profile_info">
+                <h1 class="RequestUserFullName">{{p.first_name}} {{p.last_name}} </h1>
+                <h2 class="RequestUserName">@{{p.username}}</h2>
+            </div>
+            <div class="followings_system">
+                <div class="No_Posts">
+                    <h1>{{user_post}}</h1>
+                    <h2 class="User_Posts">Posts </h2>
+                </div>
+                <div class="No_Following">
+                    <h1>{{user_following}}</h1>
+                    <h2 class="Following">Following</h2>
+                </div>
+                <div class="No_Followers">
+                    <h1>{{user_followers}}</h1>
+                    <h2 class="Followers">Followers</h2>
+                </div>
+            </div>
+            <div class="follow">
+                <form action="/requestProfile/" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="follower" value="{{user.id}}" readonly />
+                    <input type="hidden" name="user" value="{{p.id}}" readonly />
+                    <input type="hidden" name="userId" value="{{UserId}}" readonly />
+                    <input type="hidden" name="value" value="{{user_follower_value}}" readonly />
+                    {% if user_follower_value == 'follow' %}
+                    <button type="submit" class="btn"><a>Follow</a></button>
+                    {% else %}
+                    <button type="submit" class="btn"><a>Unfollow</a></button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+
+        {%endfor%}
+    </div>
+
+
+
+</section>
+
+{%endblock%}

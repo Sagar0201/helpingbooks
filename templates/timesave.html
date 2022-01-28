@@ -1,0 +1,71 @@
+{% extends 'basic.html' %}
+{%block title%}SignUp{%endblock%}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
+</style>
+
+
+{% endblock %}
+
+{%block body%}
+
+
+
+{%endblock%}
+
+
+# @login_required(login_url="/login/")
+# def requestProfile(request):
+# # if request.method == 'POST':
+# # value = request.POST.get('value')
+# # user = request.POST.get('user')
+# # follower = request.POST.get('follower')
+
+# # if value == "follow":
+# # followers_cnt = FollowersCount.objects.create(
+# # follower=follower, user=user)
+# # followers_cnt.save()
+
+# # messages.success(request, "follower Added Successfully")
+
+# # else:
+# # print(False)
+# # return redirect("/home")
+
+# # if request.method == "get":
+# UserNo = int(request.GET.get('UserNo', '0'))
+# RequestProfile = User.objects.all()
+# current_user = request.user
+
+# books = Book.objects.all()
+# profile = Profile.objects.all()
+
+# allbooks = []
+# for book in books:
+# if book.user_id == UserNo:
+# allbooks.append(book)
+# n = len(allbooks)
+
+# allProfile = []
+# for user in RequestProfile:
+# if user.id == UserNo:
+# allProfile.append(user)
+
+# allFollowers = []
+# for user in allProfile:
+# user_followers = len(
+# FollowersCount.objects.filter(follower=user))
+# allFollowers.append(user_followers)
+# user_following = len(FollowersCount.objects.filter(user=user))
+# allFollowers.append(user_following)
+
+# params = {'Profile': allProfile, 'n': n,
+# 'current_user': current_user, 'user_followers': user_followers, 'user_following': user_following, 'allFollowers':
+allFollowers}
+# return render(request, 'requestProfile.html', params)

@@ -1,0 +1,155 @@
+{% extends 'basic.html' %}
+{% block title %}helping books{%endblock%}
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/helping_books.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        referrerpolicy="no-referrer" />
+    <title>The Journey Of Life</title>
+</head>
+
+<body>
+
+
+    <!-- ################# homw page###################### -->
+
+    {%block body%}
+    <section class="home-page" id="homepage ">
+
+        <div class="home" id="homeUI">
+            <div class="content">
+                <h1 class="main-title" style="--i:0;">Helping Books</h1>
+                <p>Help The People Who Does Not Afford The Books</p>
+                <button class="btn"><a href="#bookposts">find books</a>
+            </div>
+            <div class="bookimage" style="--i:0;">
+                <img src="{% static 'images/h121.png' %}" alt="">
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+
+    <!-- ################### posts pages ############################ -->
+    <section class="bookposts " id="bookposts">
+        {% for Book,nSlides in allbooks%}
+
+        <div class="booksitems" id="{{Book.0.book_category}}">
+
+            <h1>{{Book.0.book_category}}</h1>
+            <form action="/allBooks/" method="post">{% csrf_token %}
+                <input type="text" name="showBook" class="showBook-input" value="{{Book.0.book_category}}"
+                    maxlength="150" id="showBook">
+                <button class="btn show-all"><a>Show All</a></button>
+            </form>
+            <div class="bookitems" id="content{{nSlides}}">
+
+                {% for p in Book %}
+
+                <div class="bookinfo">
+                    <div class="bookimg">
+                        <img src="/media/{{p.book_image}}" alt="">
+                    </div>
+
+                    <div class="booktext" id="post{{forloop.counter}}">
+                        <div class="user-info1">
+                            <img src="{{p.user.profile.image.url}}" alt="">
+                            <form action="/requestProfile/" method="get">{% csrf_token %}
+                                <input type="hidden" name="UserId" value="{{p.user.id}}" readonly>
+                                <button type="submit">
+                                    <h3 class="user-name"></h3>{{p.user.username}}</h3>
+                                </button>
+                            </form>
+                        </div>
+
+                        <h2 class="book-name">{{p.book_name}}</h2>
+                        <p class="book-category"><b>Book Category : </b>{{p.book_category}}</p>
+                        <p class="book-outher"><b>Book Outher : </b>{{p.book_outher}}</p>
+                        <p class="user-mobile-no"><b>Mobile No : </b>+91 {{p.user_mobile_no}}</p>
+                        <p class="book-info"><b>About Book : </b>{{p.book_info}}</p>
+                        <p class="user-address"><b>Address : </b>{{p.user_address}}</p>
+                        <button class="btn requestButton"><a href="#">Request</a>
+                    </div>
+                </div>
+
+                {%endfor%}
+
+                <a class="prev" id="left-button{{nSlides}}">&#10094;</a>
+                <a class="next" id="right-button{{nSlides}}">&#10095;</a>
+
+            </div>
+
+
+
+
+
+        </div>
+        {%endfor%}
+
+
+    </section>
+
+
+
+
+
+    {% comment %} about us {% endcomment %}
+
+    <section id="about-us" class="upper">
+        <div class="about-us">
+            <div class="about-text">
+                <h1 class="big">About Us</h1>
+                <p>your one small help change someones life.</p>
+                <p>help thos People who don't Afford to buy the books and make him happy.</p>
+
+            </div>
+            <div class="about-img">
+                <img src="{% static 'images/h123.png' %}" alt="">
+
+            </div>
+        </div>
+    </section>
+
+    {%endblock%}
+
+
+    <!-- ############################# footer ############################### -->
+
+
+    <!-- {% comment %} <footer class="footer" id="footers">
+        <div class="social-media-links">
+            <i class="fab fa-facebook fa-4x"></i>
+            <i class="fab fa-twitter fa-4x"></i>
+            <i class="fab fa-instagram fa-4x"></i>
+        </div>
+        <p>The Journey Of Life &copy; 2021, All Rights Reserved</p>
+    </footer> {% endcomment %} -->
+
+
+
+    {% comment %} vav scrolling {% endcomment %}
+
+    {% comment %}
+    <script src="{% static 'js/helping_books.js' %}">
+    </script> {% endcomment %}
+
+
+
+
+
+
+
+
+    <!-- ########################## scrolling######################### -->
+</body>
+
+</html>

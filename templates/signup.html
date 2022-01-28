@@ -1,0 +1,240 @@
+{% extends 'basic.html' %}
+{% load static %}
+{%block title%}Log In Page{%endblock%}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .footer {
+        display: none
+    }
+
+    .login-page {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
+        overflow-y: hidden;
+    }
+
+    .Login {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 90%;
+        height: 90%;
+        margin: auto;
+        z-index: 3;
+        background-clip: padding-box;
+        border-radius: 30px;
+        background-color: #ffffff10;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 25px 45px rgb(0, 0, 0, 0.1);
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-right: 1px solid rgb(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    }
+
+    .Logincontent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .Logincontent h1 {
+        font-size: 8em;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background: linear-gradient(to right, red, black);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        text-align: center;
+    }
+
+    .Logincontent p {
+        font-size: 2rem;
+        padding: 1rem 0;
+        font-weight: 300;
+        width: 100%;
+        text-align: center;
+    }
+
+    .Login .bookimage {
+        width: 35rem;
+        height: 40rem;
+        position: relative;
+    }
+
+    .bookimage img {
+        display: block;
+        width: 100%;
+        height: 100%;
+
+    }
+
+    .form1 {
+        width: 30rem;
+        padding: 3rem;
+        background-clip: padding-box;
+        border-radius: 10px;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #ffffff10;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 25px 45px rgb(0, 0, 0, 0.1);
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-right: 1px solid rgb(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    }
+
+    .form1 h2 {
+        text-transform: capitalize;
+        color: #444;
+        font-weight: 500;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .form1 input {
+        width: 98%;
+        background: rgb(255, 255, 255, 0.2);
+        border: none;
+        outline: none;
+        padding: 7px 20px;
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+        border-right: 1px solid rgb(255, 255, 255, 0.2);
+        border-radius: 5px;
+        font-size: 16px;
+        letter-spacing: 1px;
+        color: #444;
+        margin: 0.5em;
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    }
+
+    .inputBox button::before,
+    .inputBox button::after {
+        cursor: pointer;
+        background: #444;
+        box-shadow: 0 0 5px #444, 0 0 15px #444, 0 0 30px #444, 0 0 60px #444;
+    }
+
+    .forget {
+        margin-top: 10px;
+        color: #444;
+        font-size: 15px;
+        font-weight: 700;
+    }
+
+    .forget a {
+        margin-top: 10px;
+        padding: 0 0.5em;
+        color: #444;
+        font-weight: 500;
+    }
+
+    @media (max-width:500px) {
+        .login-page {
+            overflow: hidden;
+        }
+
+        .Login {
+            height: 95%;
+            flex-direction: column;
+            margin-top: 1rem;
+            overflow: hidden;
+            background-color: #ffffff10;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            justify-content: center;
+
+        }
+
+        .Logincontent {
+            width: 100%;
+            height: 21rem;
+            /* transform: rotate(326deg); */
+        }
+
+        .Logincontent h1 {
+            font-size: 4rem;
+        }
+
+        .Logincontent p {
+            font-size: 1.5rem;
+        }
+
+        .Logincontent .bookimage {
+            height: 38rem;
+            width: 90%;
+            display: none;
+        }
+
+        .form1 {
+            border: none;
+            background: none;
+            box-shadow: none;
+            width: 100%;
+            max-width: 32rem;
+            backdrop-filter: none;
+        }
+
+    }
+</style>
+
+
+{% endblock %}
+
+{%block body%}
+<section class="login-page" id="loginpage ">
+
+    <div class="Login" id="LoginUI">
+        <div class="Logincontent">
+            <div class="bookimage">
+                <img src="{% static 'images/h121.png' %}" alt="">
+            </div>
+            <h1 class="main-title">Helping Books</h1>
+            <p>Help The People Who Does Not Afford The Books</p>
+
+        </div>
+
+        <div class="form1">
+
+            <form action="/signup/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="inputBox">
+                    <h2 class="signup-heading">SignUp Form</h2>
+                    <input type="text" Name="username" placeholder="User Name" id="username" required>
+                    <input type="text" Name="fname" id="fname" placeholder="First Name" required>
+                    <input type="text" Name="lname" id="lname" placeholder="Last Name" required>
+                    <input type="email" Name="email" id="email" placeholder="Email" required>
+                    <input type="password" Name="password" id="password" placeholder="Password" required>
+                    <button class="btn"><a>SignUp</a></button>
+                    <p class="forget">Log In <a href="{% url 'login'%}">Click Here</a></p>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+</section>
+
+{%endblock%}

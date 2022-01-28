@@ -1,0 +1,856 @@
+{% extends 'basic.html' %}
+{%block title%}Profile Page{%endblock%}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
+
+    .navcat {
+        display: none;
+    }
+
+    .profile {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .profile-page {
+        width: 94%;
+        height: 81%;
+        display: flex;
+        border-radius: 30px;
+        background-color: #ffffff10;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 25px 45px rgb(0, 0, 0, 0.1);
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-right: 1px solid rgb(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+        background-clip: padding-box;
+    }
+
+    .account-info {
+        width: 35rem;
+        height: 100%;
+        border-radius: 30px 0px 0px 30px;
+        background-color: #ffffff10;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 25px 45px rgb(0, 0, 0, 0.1);
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-right: 1px solid rgb(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+        background-clip: padding-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        display: flex;
+
+
+    }
+
+    .profile-update-btn .btn::before,
+    .profile-update-btn .btn::after {
+        box-shadow: none;
+    }
+
+    .profile-update-btn {
+        padding: 3rem 0em;
+    }
+
+    .account-info .user-profile-view {
+        border-radius: 30px 0px 0px 30px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .account-info .user-profile-update {
+        border-radius: 30px 0px 0px 30px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profile-form {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .user-profile {
+        width: 100%;
+        height: 22rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        margin-top: 1rem;
+        border-radius: 50%;
+
+    }
+
+    .profile_photo {
+        width: 15rem;
+        height: 15rem;
+        justify-content: center;
+        align-items: center;
+        border-radius: 40% 60% 64% 36% / 39% 66% 34% 61%;
+    }
+
+    .profile_photo img {
+        display: block;
+        height: 100%;
+        width: 100%;
+        margin: auto;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 40% 60% 64% 36% / 39% 66% 34% 61%;
+    }
+
+    .user-names {
+        margin-top: 1em;
+    }
+
+    .user_id {
+        text-align: center;
+        color: #444;
+        font-weight: 700;
+        font-size: 1.5em;
+    }
+
+    .user-names h1 {
+        font-size: 2.2rem;
+        color: #444;
+        font-weight: 600;
+        text-align: center;
+        text-transform: capitalize;
+        box-shadow: 10px 10px 10px rgb(45, 55, 68, 0.0.3);
+
+    }
+
+    .user-profile-info1 {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 2em 1em;
+        overflow: auto;
+    }
+
+    .user-profile-info1 .followings_system {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        text-align: center;
+        margin: 2rem 1rem;
+    }
+
+    .user-profile-info1 .followings_system h1 {
+        font-size: 700;
+        color: #444;
+        cursor: pointer;
+    }
+
+    .user-profile-info1 .followings_system h2 {
+        font-size: 1em;
+    }
+
+    .user-profile-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .user-profile-info a {
+        color: #444;
+        font-size: 2em;
+        margin-left: 0.3em;
+        font-weight: 600;
+        width: 10rem;
+        text-decoration: none;
+
+    }
+
+    .profile_page_links {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        margin-bottom: 0.5em;
+    }
+
+    .user-profile-info img {
+        width: 3rem;
+        height: 3rem;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .profile-update-btn {
+        display: flex;
+        justify-content: center;
+    }
+
+    .account-books {
+        width: 100%;
+        height: 100%;
+        border-radius: 0px 30px 30px 0px;
+        overflow: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .account-books-inside {
+        padding: 5em 1em;
+        width: 100%;
+        height: 100%;
+        border-radius: 0px 30px 30px 0px;
+        overflow: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    /* ########### profile Photo Update ########### */
+
+    .wrapper {
+        height: 15rem;
+        width: 15rem;
+        position: relative;
+        border: 5px solid #fff;
+        background-size: 100% 100%;
+        margin: 2rem auto;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .wrapper img {
+        display: block;
+        height: 100%;
+        width: 100%;
+        margin: auto;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .wrapper input {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 4rem;
+        z-index: 2;
+        display: none;
+    }
+
+    .wrapper h2 {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        padding: 1.5rem 0rem;
+        text-align: center;
+        z-index: 1;
+        display: none;
+        font-weight: 500;
+    }
+
+    .wrapper:hover input {
+        display: block;
+        opacity: 0;
+    }
+
+    .wrapper:hover h2 {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        color: white;
+        cursor: pointer;
+        background-color: #ffffff10;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+
+    }
+
+    /* ############ ######### */
+
+    #uppv {
+        display: flex;
+    }
+
+    #uppu {
+        display: none;
+    }
+
+    #uppuc {
+        position: absolute;
+        bottom: 0;
+        Right: 0.5em;
+    }
+
+    /* ########## user-profile-update ################## */
+
+    .user-info-update input {
+        border: 2px solid gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .user-info-update input {
+        width: 100%;
+        background: rgb(255, 255, 255, 0.2);
+        border: none;
+        outline: none;
+        padding: 5px 20px;
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-right: 1px solid rgb(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+        font-size: 16px;
+        letter-spacing: 1px;
+        color: #444;
+        text-align: center;
+        margin-bottom: 0.5em;
+        border: 1px solid white;
+
+    }
+
+    .user-info-update input::placeholder {
+        color: #444;
+        text-align: center;
+
+    }
+
+    /* book delete */
+    .BookOptions .BookDeleteButton {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 1.5em;
+        font-size: 3rem;
+        background: transparent;
+        border: none;
+        color: #444;
+        padding: 0em 0.2em;
+        cursor: pointer;
+    }
+
+
+    .bookinfo .DeleteBookFix {
+        width: 100%;
+        height: 100%;
+        float: center;
+        line-height: 1.5;
+        box-shadow: 0 25px 45px rgb(0, 0, 0, 0.1);
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-left: 1px solid rgb(255, 255, 255, 0.2);
+        border-top: 1px solid rgb(255, 255, 255, 0.2);
+        background-clip: padding-box;
+        padding: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: none;
+
+    }
+
+    .bookinfo .DeleteBookFix input {
+        display: none;
+    }
+
+    .bookinfo .DeleteBookFix h1 {
+        margin: 1em;
+        text-align: center;
+        font-size: 2.7em;
+        color: #444;
+        font-weight: 900;
+    }
+
+    .bookinfo .DeleteBookFix .DeleteBooksButtons {
+        display: block;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+
+    /* ############# delete fkdfd ############### */
+    .booktext .BooksDeleteOptions {
+        background-color: #ffffff10;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 2px solid transparent;
+        line-height: 1.5;
+        box-shadow: 0 25px 45px rgb(0, 0, 0, 0.1);
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-right: 1px solid rgb(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+        background-clip: padding-box;
+        width: auto;
+        text-align: center;
+        position: absolute;
+        overflow: hidden;
+        top: 1rem;
+        right: 3rem;
+        font-size: 1.5em;
+        font-weight: 600;
+        cursor: pointer;
+        display: none;
+    }
+
+    .booktext .BooksDeleteOptions li {
+        list-style: none;
+        padding: 0.2em 1em;
+
+    }
+
+
+    .user_following {
+        display: flex;
+        width: 25rem;
+        height: 7rem;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 1em;
+        border-radius: 5px;
+        background-color: #ffffff10;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid white;
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+        overflow-y: hidden;
+    }
+
+
+
+    .user_following .user_following_profile_pic img {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        border: 3px solid white;
+        display: block;
+        margin: auto;
+        object-fit: cover;
+        object-position: center;
+
+    }
+
+    .user_following .user_following_profile_name button {
+        border: none;
+        background: transparent;
+        font-size: 1.5rem;
+        color: #444;
+        font-weight: 700;
+        text-transform: capitalize;
+        padding: 0 0.5em;
+        height: 3rem;
+        width: 100%;
+        overflow: hidden;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .user_following .user_following_profile_form input {
+        width: 0px;
+        height: 0px;
+    }
+
+    #ShowBooks {
+        display: flex;
+    }
+
+    #ShowFollowings {
+        display: none;
+    }
+
+    #ShowFollowers {
+        display: none;
+    }
+
+    .allBooks-category {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .allBooks-category h1 {
+        font-size: 8rem;
+        padding: 2rem;
+        border-radius: 10px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-weight: 500;
+        text-transform: capitalize;
+        color: transparent;
+        text-align: center;
+        color: rgb(255, 255, 255);
+        text-shadow: 0px 11px 10px rgba(0, 217, 255, 0.8);
+        color: transparent;
+        text-shadow: 0 0 8px #444;
+    }
+
+
+
+
+    @media (max-width:500px) {
+        .profile {
+            height: auto;
+            display: block;
+
+        }
+
+        .profile .profile-page {
+            width: auto;
+            height: auto;
+            display: block;
+            border-radius: 0;
+            overflow: hidden;
+            border: none;
+        }
+
+        .account-info {
+            width: 100vw;
+            border-radius: 0px;
+            box-shadow: none;
+            border: none;
+        }
+
+        .account-info .user-profile-view {
+            margin-top: 4rem;
+            border-radius: 0px;
+            width: 90%;
+            height: 88vh;
+            margin-top: 1.8em;
+            border-radius: 30px;
+            background-color: #ffffff10;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 25px 45px rgb(0, 0, 0, 0.1);
+            border: 1px solid rgb(255, 255, 255, 0.5);
+            border-right: 1px solid rgb(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+            box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+
+            /* border: 1px solid red; */
+        }
+
+        .user-profile {
+            border-radius: 0px;
+        }
+
+        .user-profile-info1 {
+            height: auto;
+        }
+
+        .account-books {
+            border-radius: 30px;
+            box-shadow: 0 25px 45px rgb(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .user-profile-update .profile-form button {
+            left: -5em;
+
+        }
+
+        .user-profile-update .profile-form .btn::before,
+        .user-profile-update .profile-form .btn::after {
+            background: linear-gradient(to right, rgb(255, 255, 255), rgb(0, 217, 255));
+            box-shadow: none;
+        }
+
+        .user-profile-update .profile-form input {
+            border: none;
+            border-bottom: 0.5px solid white;
+        }
+
+        .account-info .user-profile-update {
+            border-radius: 0px;
+            margin-top: 1em;
+            width: 90%;
+            height: 88vh;
+            overflow: hidden;
+            border-radius: 30px;
+            bbackground-color: #ffffff10;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 25px 45px rgb(0, 0, 0, 0.1);
+            border: 1px solid rgb(255, 255, 255, 0.5);
+            border-right: 1px solid rgb(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+            box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+        }
+
+
+        .profile-form .user-info-update {
+            width: 90%;
+            max-width: 25rem;
+        }
+
+        .user-info-update .profile_update_list {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 0.5em;
+        }
+
+        .user-info-update .profile_update_list input {
+            background: transparent;
+            border: 1px solid white;
+            margin: 0;
+        }
+
+        .user-info-update .profile_update_list label {
+            font-size: 1.6em;
+        }
+
+
+
+    }
+</style>
+
+
+{% endblock %}
+{%block body%}
+
+<section class="profile">
+    <div class="profile-page">
+        <div class="account-info">
+            <div class="user-profile-view" id="uppv">
+                <div class="user-profile">
+                    <div class="profile_photo">
+                        <img src="{{request.user.profile.image.url}}" alt="">
+
+                    </div>
+                    <div class="user-names">
+                        <h1 class="user-name"> {{request.user.first_name}} {{request.user.last_name}} </h1>
+                        <h3 class="user_id">@{{request.user.username}}</h3>
+
+                    </div>
+
+                </div>
+
+                <div class="user-profile-info1">
+                    <div class="followings_system">
+                        <div class="No_Posts">
+                            <h1 onclick="ShowBooks()">{{n}}</h1>
+                            <h2 class="User_Posts">Posts </h2>
+                        </div>
+                        <div class="No_Following">
+                            <h1 onclick="ShowFollowings()">{{user_following}}</h1>
+                            <h2 class="Following">Following</h2>
+                        </div>
+                        <div class="No_Followers">
+                            <h1 onclick="ShowFollowers()">{{user_followers}}</h1>
+                            <h2 class="Followers">Followers</h2>
+                        </div>
+
+
+                    </div>
+                    <div class="user-profile-info">
+                        <div class="profile_page_links">
+                            <img src="../../static/logos/plus.png" alt="">
+                            <a href="{% url 'addbook'%}">Add Book</a>
+                        </div>
+                        <div class="profile_page_links">
+                            <img src="../../static/logos/logout.png" alt="">
+                            <a href="{% url 'logout'%}">Logout</a>
+                        </div>
+
+                        <div class="profile_page_links">
+                            <img src="../../static/logos/passwordChange.png" alt="">
+                            <a href="{% url 'change_password'%}">Password</a>
+                        </div>
+
+                    </div>
+
+                    <div class="profile-update-btn">
+                        <button onclick="ppu()" class="btn"><a>Edit Profile</a></button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="user-profile-update" id="uppu">
+                <form action="/profile/" method="post" class="profile-form" enctype="multipart/form-data">
+                    {% csrf_token%}
+
+                    <div class="wrapper" id="imagePreview">
+                        <input type="file" id="inpFile" class="my_file" name="image" accept="static/profile_pic">
+                        <h2>upload Photo</h2>
+                        <img src="{{request.user.profile.image.url}}" alt="" class="image-preview__image">
+                    </div>
+                    <div class="user-info-update">
+                        <div class="profile_update_list">
+                            <label for="id_first_name">First Name</label>
+                            <input type="text" name="first_name" value="{{request.user.first_name}}" maxlength="150"
+                                id="id_first_name" required>
+                        </div>
+                        <div class="profile_update_list">
+                            <label for="id_last_name">Last Name</label>
+                            <input type="text" name="last_name" value="{{request.user.last_name}}" maxlength="150"
+                                id="id_last_name" required>
+                        </div>
+
+                        <div class="profile_update_list">
+                            <label for="id_email">Email</label>
+                            <input type="email" name="email" value="{{request.user.email}}" maxlength="254"
+                                id="id_email" required>
+                        </div>
+
+                        <div class="profile_update_list">
+                            <label for="id_username">UserName</label>
+                            <input type="text" name="username" value="{{request.user.username}} " maxlength="150"
+                                required="" id="id_username">
+                        </div>
+                    </div>
+
+                    <button class="btn"><a>Update</a></button>
+
+                </form>
+                <button onclick="ppuc()" class="btn" id="uppuc"><a>Cancle</a></button>
+            </div>
+
+
+        </div>
+        <div class="account-books">
+            <div class="Profile_page_books account-books-inside" id="ShowBooks">
+                {% if Book|length == 0 %}
+                <div class="allBooks-category">
+                    <h1>No Books For Doneting.</h1>
+                </div>
+                {%else %}
+                {% for p in Book %}
+                <div class="bookinfo">
+                    <div class="bookimg" id="bookimg{{forloop.counter}}">
+                        <img src="/media/{{p.book_image}}" alt="">
+                    </div>
+
+                    <div class="booktext" id="Booktext{{forloop.counter}}">
+                        <div class="user-info1">
+
+                            <img src="{{p.user.profile.image.url}}" alt="">
+                            <p class="user-name">{{p.user.username}}</p>
+                        </div>
+                        <div class="BookOptions">
+                            <button class="BookDeleteButton" id="BookOptionNo{{forloop.counter}}">:</button>
+                        </div>
+
+                        <h2 class="book-name">{{p.book_name}}</h2>
+                        <p class="book-category"><b>Book Category : </b>{{p.book_category}}</p>
+                        <p class="book-outher"><b>Book Outher : </b>{{p.book_outher}}</p>
+                        <p class="user-mobile-no"><b>Mobile No : </b>+91 {{p.user_mobile_no}}</p>
+                        <p class="book-info"><b>About Book : </b>{{p.book_info}}</p>
+                        <p class="user-address"><b>Address : </b>{{p.user_address}}</p>
+                        <button class="btn requestButton"><a href="#">Accept</a></button>
+                        <div class="BooksDeleteOptions" id="DeleteBook{{forloop.counter}}">
+                            <ul>
+                                <li id="Delete1{{forloop.counter}}">Delete</li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    <div class="DeleteBookFix" id="DeleteBookConfirm{{forloop.counter}}">
+                        <form action="/profile/" class="BookDelete-form" method="post">{% csrf_token %}
+                            <h1 class="DeleteBookHeading">Are You Shore To Delete This Book</h1>
+                            <input type="text" name="BookId" class="DeleteBook-input" value="{{p.id}}" maxlength="150"
+                                id="showBook{{i}}">
+                            <div class="DeleteBooksButtons">
+                                <button class="btn " type="reset"
+                                    id="DeleteBookCancle{{forloop.counter}}"><a>Cancle</a></button>
+                                <button class="btn " type="submit"><a>Confirm</a></button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                {%endfor%}
+                {% endif %}
+
+            </div>
+
+
+            <div class="profile_page_following account-books-inside" id="ShowFollowings">
+                {% if user_following_user_list|length == 0 %}
+                <div class="allBooks-category">
+                    <h1>You Don't Follow Anyones.</h1>
+                </div>
+                {%else %}
+                {% for user in user_following_user_list %}
+                <div class="user_following">
+                    <div class="user_following_profile_pic">
+                        <img src="{{user.profile.image.url}}" alt="">
+                    </div>
+                    <div class="user_following_profile_name">
+                        <form action="/requestProfile/" method="get">{% csrf_token %}
+                            <input type="hidden" name="UserId" value="{{user.id}}" readonly>
+                            <button type="submit">
+                                <h3 class="user-name"></h3>{{user.first_name}} {{user.last_name}}</h3>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+                {%endfor%}
+                {% endif %}
+            </div>
+
+
+
+            <div class="profile_page_following account-books-inside" id="ShowFollowers">
+
+                {% if user_follower_user_list|length == 0 %}
+                <div class="allBooks-category">
+                    <h1>No One Follow You.</h1>
+                </div>
+                {%else %}
+                {% for user in user_follower_user_list %}
+                <div class="user_following">
+                    <div class="user_following_profile_pic">
+                        <img src="{{user.profile.image.url}}" alt="">
+                    </div>
+                    <div class="user_following_profile_name">
+                        <form action="/requestProfile/" method="get">{% csrf_token %}
+                            <input type="hidden" name="UserId" value="{{user.id}}" readonly>
+                            <button type="submit">
+                                <h3 class="user-name"></h3>{{user.first_name}} {{user.last_name}}</h3>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {%endfor%}
+                {% endif %}
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+{%endblock%}

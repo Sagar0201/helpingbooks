@@ -1,0 +1,173 @@
+{% extends 'basic.html' %}
+{%block title%}Log In Page{%endblock%}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
+
+    .navcat {
+        display: none;
+    }
+
+    .addbook {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .AddBookPage {
+        width: 90%;
+        height: 80%;
+        border-radius: 30px;
+        background-color: #ffffff10;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 25px 45px rgb(0, 0, 0, 0.1);
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-right: 1px solid rgb(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    }
+
+    .AddBookPage img {
+        height: 50rem;
+        width: 40rem;
+    }
+
+    .addBook-form {
+        background: transparent;
+        width: 60rem;
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .addBook-form h2 {
+        text-transform: capitalize;
+        color: #444;
+        font-weight: 700;
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
+
+    .addBook-form input,
+    textarea {
+        width: 25rem;
+        background: rgb(255, 255, 255, 0.2);
+        border: none;
+        outline: none;
+        text-transform: capitalize;
+        padding: 10px 20px;
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-right: 1px solid rgb(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgb(255, 255, 255);
+        font-size: 16px;
+        letter-spacing: 1px;
+        color: #444;
+        margin: 0.5em;
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    }
+
+    .addBook-form button {
+        bottom: 5rem;
+        left: 2rem;
+
+    }
+
+    .addBook-form textarea {
+        height: 8rem;
+    }
+
+    @media (max-width:500px) {
+        .addbook {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .AddBookPage {
+            margin-top: -5em;
+            height: 88%;
+        }
+
+        .AddBookPage img {
+            display: none;
+        }
+
+        .addBook-form {
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            justify-content: space-evenly;
+        }
+
+        .addBookForm h2 {
+            width: 100%;
+            text-align: center;
+        }
+
+        .addBookForm {
+            display: flex;
+            width: 30rem;
+            height: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .addBookForm input,
+        textarea {
+            width: 90%;
+            border-radius: 5px;
+            padding: 7px 20px;
+            margin: 0.2em 0em;
+        }
+
+        .addBook-form button {
+            bottom: -1em;
+            left: 0;
+        }
+    }
+</style>
+
+{% endblock %}
+
+{%block body%}
+<section class="addbook">
+    <div class="AddBookPage">
+
+        <div class="addBook-form">
+
+            <form action="/addbook/" method="post" class="addBookForm" enctype="multipart/form-data">{% csrf_token %}
+                <h2>Add Book Here</h2>
+                <input type="file" spellcheck="true" value="{{book_image}}" id="img" name="img" accept="static/images"
+                    required>
+                <input type="text" spellcheck="true" value="{{book_name}}" name="book_name" id=""
+                    placeholder="Book Name" required>
+                <input type="text" spellcheck="true" value="{{book_category}}" name="book_category" id=""
+                    placeholder="Book Category" required>
+                <input type="text" spellcheck="true" value="{{book_outher}}" name="book_outher" id=""
+                    placeholder="Book Outher" required>
+                <input type="number" spellcheck="true" value="{{user_mobile_no}}" name="mobile_number" id=""
+                    placeholder="User Mobile Number" required>
+                <input type="text" spellcheck="true" value="{{user_address}}" name="user_address" id=""
+                    placeholder="Address" required>
+                <textarea name="book_info" value="{{book_info}}" spellcheck="true" id="" cols="30" rows="10"
+                    placeholder="Book information" required></textarea>
+                <button class="btn"><a>Send</a>
+            </form>
+        </div>
+        <img src="../static/images/h121.png" loading="lazy" alt="">
+    </div>
+</section>
+{%endblock%}

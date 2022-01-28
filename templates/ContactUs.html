@@ -1,0 +1,124 @@
+{% extends 'basic.html' %}
+{%block title%}Log In Page{%endblock%}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
+
+    .navcat {
+        display: none;
+    }
+
+    .contactus {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ContactUsPage {
+        width: 90%;
+        height: 80%;
+        border-radius: 30px;
+        background-color: #ffffff10;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 25px 45px rgb(0, 0, 0, 0.1);
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-right: 1px solid rgb(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .ContactUsPage img {
+        height: 40rem;
+        width: 40rem;
+    }
+
+    .contactUs-form {
+        background-color: transparent;
+        width: 30rem;
+        padding: 1rem;
+    }
+
+    .contactUs-form h2 {
+        text-transform: capitalize;
+        color: #444;
+        font-weight: 500;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .contactUs-form input,
+    textarea {
+        width: 100%;
+        background: rgb(255, 255, 255, 0.2);
+        border: none;
+        outline: none;
+        padding: 0.5em 1em;
+        border-radius: 35px;
+        border: 1px solid rgb(255, 255, 255, 0.5);
+        border-right: 1px solid rgb(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+        font-size: 1.6em;
+        letter-spacing: 1px;
+        color: #444;
+        margin: 0.5em;
+    }
+
+    .contactUs-form textarea {
+        height: 8rem;
+    }
+
+    @media (max-width:900px) {
+        .ContactUsPage img {
+            width: 30rem;
+            height: 30rem;
+        }
+    }
+
+    @media (max-width:550px) {
+        .ContactUsPage {
+            flex-direction: column;
+            height: 88%;
+            margin-top: -5em;
+        }
+
+        .contactUs-form input,
+        textarea {
+            padding: 0.5em 1em;
+            margin-top: 0.2em;
+        }
+
+    }
+</style>
+
+{% endblock %}
+
+{%block body%}
+<section class="contactus">
+    <div class="ContactUsPage">
+
+        <div class="contactUs-form">
+            <h2>Send Message</h2>
+            <form action="/contact/" method="post">{% csrf_token %}
+                <input type="text" name="name" id="" placeholder="Name" required>
+                <input type="email" name="email" id="" placeholder="Email" required>
+                <textarea name="message" id="" cols="30" rows="10" placeholder="Type Your Message Here"
+                    required></textarea>
+                <button class="btn"><a>Send</a>
+            </form>
+        </div>
+
+        <img src="../static/images/contact-us.png" alt="">
+    </div>
+</section>
+
+{%endblock%}
